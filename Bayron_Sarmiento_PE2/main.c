@@ -55,7 +55,7 @@ int main()
 void description()
 {
     printf("\nName: Sean Gabriel Bayron\n");
-    printf("Student Number: 2021-\n");
+    printf("Student Number: 2021-04354\n");
     printf("Name: Arnel Jan Sarmiento\n");
     printf("Student Number: 2021-05094\n");
     printf("Date: 2023-3-05\n");
@@ -75,7 +75,7 @@ void compress(char *str)
     printf("\n");
     while (str[i] != '\0')
     {
-        if (str[i] >= 'a' && str[i] <= 'z' || str[i] >= 'A' && str[i] <= 'Z')
+        if ( (str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z') )
         {
             if (str[i] == str[i + 1])
             {
@@ -113,7 +113,7 @@ void expand(char *str)
     printf("\n");
     while (str[i] != '\0')
     {
-        if (str[i] >= 'a' && str[i] <= 'z' || str[i] >= 'A' && str[i] <= 'Z')
+        if ( (str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z') )
         {
             printf("%c", str[i]);
         }
