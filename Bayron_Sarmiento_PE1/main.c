@@ -6,7 +6,6 @@
 void infix_to_postfix(char *infix, char *postfix);
 void description();
 void instructions();
-// void deallocate(char *infix, char *postfix);
 void tokenize_input(char* input, char** tokens, int* num_tokens);
 int evaluate_postfix(char* postfix);
 
@@ -42,15 +41,14 @@ int main()
             for (int i=0; i<MAX; i++) {
                 tokens[i] = malloc(20 * sizeof(char));
             }
-            tokenize_input(input_expr, tokens, &num_tokens);
+            // tokenize_input(input_expr, tokens, &num_tokens);
             
             for (int i = 0; i < num_tokens; i++) 
             {
-                // copy elements of tokens to infix
-                strcat(infix, tokens[i]);
-                printf("%s", tokens[i]);
+                // strcat(infix, tokens[i]);
+                printf("%c", input_expr[i]);
             }
-            infix_to_postfix(infix, postfix);
+            // infix_to_postfix(infix, postfix);
 
             result = evaluate_postfix(postfix);
             printf("Result: %d\n", result);
@@ -100,7 +98,7 @@ void instructions()
 /*
    Tells if a token is an operator
 */
-int is_operator(char c)
+int isoperator(char c)
 {
     return c == '+' || c == '-' || c == '*' || c == '/' || c == '%';
 }
@@ -127,6 +125,9 @@ int precedence(char c)
     return 0;
 }
 
+
+
+
 /*
    Converts an infix expression to its equivalent postfix expression
 */
@@ -141,12 +142,12 @@ void infix_to_postfix(char *infix, char *postfix)
     {
         char current_char = infix[i];
 
-        if (isspace(current_char))
-        {
-            // skip whitespace
-            continue;
-        }
-        else if (isdigit(current_char))
+        // if (isspace(current_char))
+        // {
+        //     // skip whitespace
+        //     continue;
+        // }
+        if (isdigit(current_char))
         {
             // append digits directly to postfix expression
             while (isdigit(infix[i]))
