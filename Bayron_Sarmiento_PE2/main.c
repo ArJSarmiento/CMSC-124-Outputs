@@ -52,6 +52,9 @@ int main()
     return 0;
 }
 
+/*
+    Prints program description
+*/
 void description()
 {
     printf("\nName: Sean Gabriel Bayron\n");
@@ -67,6 +70,9 @@ void description()
         "Arnel developed the original version of the program. Sean then modified the program to make it more efficient.\n");
 }
 
+/*
+    Compresses a string based on the number of consecutive characters
+*/
 void compress(char *str)
 {
     int i = 0;
@@ -75,7 +81,7 @@ void compress(char *str)
     printf("\n");
     while (str[i] != '\0')
     {
-        if ( (str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z') )
+        if ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z'))
         {
             if (str[i] == str[i + 1])
             {
@@ -105,6 +111,9 @@ void compress(char *str)
     printf("\n");
 }
 
+/*
+    Expands a string based on the number of consecutive characters
+*/
 void expand(char *str)
 {
     int i = 0;
@@ -113,7 +122,7 @@ void expand(char *str)
     printf("\n");
     while (str[i] != '\0')
     {
-        if ( (str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z') )
+        if ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z'))
         {
             printf("%c", str[i]);
         }
@@ -136,6 +145,9 @@ void expand(char *str)
     printf("\n");
 }
 
+/*
+    Prints program instructions
+*/
 void instructions()
 {
     printf("\nWelcome to this String Expansion/Compression program! Please choose an action to perform...\n");
