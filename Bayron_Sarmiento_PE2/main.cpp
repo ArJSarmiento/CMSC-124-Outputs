@@ -1,14 +1,14 @@
 #include <iostream>
-#include <cstdlib>
-#include <cstring>
 #include <string.h>
 
 using namespace std;
 
+// function prototypes
 void compress(string str);
-void expand(const string &str);
+void expand(string str);
 void description();
 void instructions();
+void input_validation(string &str);
 
 int main()
 {
@@ -19,7 +19,7 @@ int main()
     {
         instructions();
 
-        choice = getchar();
+        cin >> choice;
 
         switch (choice)
         {
@@ -30,15 +30,13 @@ int main()
         case 'E':
         case 'e':
             cout << "\nEnter a string to expand: ";
-            cin.ignore();
-            getline(cin, str);
+            input_validation(str);
             expand(str);
             break;
         case 'C':
         case 'c':
             cout << "\nEnter a string to compress: ";
-            cin.ignore();
-            getline(cin, str);
+            input_validation(str);
             compress(str);
             break;
         case 'X':
@@ -47,7 +45,7 @@ int main()
             exit(0);
             break;
         default:
-            cout << "\nInvalid input\n";
+            cout << "\n\nInvalid input\n";
             break;
         }
     }
@@ -56,22 +54,9 @@ int main()
 }
 
 /*
-    Prints program description
-*/
-void description()
-{
-    cout << "\nName: Sean Gabriel Bayron\n";
-    cout << "Student Number: 2021-04354\n";
-    cout << "Name: Arnel Jan Sarmiento\n";
-    cout << "Student Number: 2021-05094\n";
-    cout << "Date: 2023-3-05\n";
-    cout << "This program is a string compression/expansion program. It can compress and expand strings.\n";
-    cout << "The program was developed by Sean Gabriel Bayron and Arnel Jan Sarmiento.\n";
-    cout << "Arnel developed the original version of the program. Sean then modified the program to make it more efficient.\n";
-}
-
-/*
     Compresses a string based on the number of consecutive characters
+    Input: string
+    Output: none
 */
 void compress(string str)
 {
@@ -113,8 +98,10 @@ void compress(string str)
 
 /*
     Expands a string based on the number of consecutive characters
+    Input: string
+    Output: none
 */
-void expand(const string &str)
+void expand(string str)
 {
     int i = 0;
     int count = 0;
@@ -149,6 +136,8 @@ void expand(const string &str)
 
 /*
     Prints program instructions
+    Input: none
+    Output: none
 */
 void instructions()
 {
@@ -158,4 +147,32 @@ void instructions()
          << "[C] String Compression\n"
          << "[X] Exit\n"
          << "Choice: ";
+}
+
+/*
+    Prints program description
+    Input: none
+    Output: none
+*/
+void description()
+{
+    cout << "\nName: Sean Gabriel Bayron\n";
+    cout << "Student Number: 2021-04354\n";
+    cout << "Name: Arnel Jan Sarmiento\n";
+    cout << "Student Number: 2021-05094\n";
+    cout << "Date: 2023-3-05\n";
+    cout << "This program is a string compression/expansion program. It can compress and expand strings.\n";
+    cout << "The program was developed by Sean Gabriel Bayron and Arnel Jan Sarmiento.\n";
+    cout << "Arnel developed the original version of the program. Sean then modified the program to make it more efficient.\n";
+}
+
+/*
+    This function validates string inputs. Gets the entire line of input.
+    Input: pointer of input string
+    Output: none
+*/
+void input_validation(string &str)
+{
+    cin.ignore();
+    getline(cin, str);
 }
