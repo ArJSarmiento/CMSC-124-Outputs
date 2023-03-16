@@ -139,7 +139,7 @@ void expand(const string &str)
         else
         {
             cout << endl
-                 << "Invalid input" << endl;
+                 << "\nInvalid input" << endl;
             break;
         }
         i++;
