@@ -115,7 +115,6 @@ void compress(string str)
 void expand(string str)
 {
     int i = 0;
-    int count = 0;
 
     cout << endl;
 
@@ -127,7 +126,13 @@ void expand(string str)
         }
         else if (isdigit(str[i]))
         {
-            count = str[i] - '0';
+            int count = 0;
+            while (isdigit(str[i]))
+            {
+                count = count * 10 + (str[i] - '0');
+                i++;
+            }
+            i--;
             while (count > 1)
             {
                 cout << str[i + 1];
@@ -136,8 +141,7 @@ void expand(string str)
         }
         else
         {
-            cout << endl
-                 << "\nInvalid input" << endl;
+            cout << endl << "\nInvalid input" << endl;
             break;
         }
         i++;
