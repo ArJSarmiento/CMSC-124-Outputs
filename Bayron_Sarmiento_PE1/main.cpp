@@ -7,12 +7,13 @@
 
 using namespace std;
 
+// prototypes
 char is_operator(char c);
+string remove_space(string str);
+void calculate(const char *infix, char *postfix);
+int evaluate_postfix(char *postfix);
 void description();
 void instructions();
-string remove_space(string str);
-void infix_to_postfix(const char* infix, char* postfix);
-int evaluate_postfix(string postfix);
 
 int main()
 {
@@ -22,13 +23,12 @@ int main()
     string infix;
     string parsedInfix;
     char postfix[MAX];
-    int result = 0;
 
     while (choice != 'X' && choice != 'x')
     {
         instructions();
 
-        choice = getchar();
+        cin >> choice;
 
         switch (choice)
         {
@@ -41,10 +41,9 @@ int main()
             cout << "\nEnter an infix expression: ";
             cin.ignore();
             getline(cin, infix);
+
             parsedInfix = remove_space(infix);
-            infix_to_postfix(parsedInfix.c_str(), postfix);
-            result = evaluate_postfix(postfix);
-            cout << "Result: " << result << endl;
+            calculate(parsedInfix.c_str(), postfix);
             break;
         case 'X':
         case 'x':
@@ -55,20 +54,36 @@ int main()
             break;
         }
     }
+
     return 0;
 }
 
+/*
+    This function removes all spaces in a string
+    Input: string
+    Output: string
+*/
 string remove_space(string str)
 {
     str.erase(remove_if(str.begin(), str.end(), ::isspace), str.end());
     return str;
 }
 
+/*
+    This function checks if a character is an operator
+    Input: char
+    Output: char
+*/
 char is_operator(char c)
 {
     return c == '+' || c == '-' || c == '*' || c == '/' || c == '%';
 }
 
+/*
+    This function returns the precedence of an operator
+    Input: char
+    Output: int
+*/
 int precedence(char c)
 {
     switch (c)
@@ -85,29 +100,13 @@ int precedence(char c)
     }
 }
 
-void description()
+/*
+    This function converts an infix expression to its equivalent postfix expression and evaluates the postfix if valid
+    Input: infix expression
+    Output: none
+*/
+void calculate(const char *infix, char *postfix)
 {
-    cout << "\nName: Sean Gabriel Bayron\n";
-    cout << "Student Number: 2021-04354\n";
-    cout << "Name: Arnel Jan Sarmiento\n";
-    cout << "Student Number: 2021-05094\n";
-    cout << "Date: 2023-3-05\n";
-    cout << "This program converts a given infix expression to its equivalent postfix expression and then evaluates the expression.\n";
-    cout << "The program was developed by Sean Gabriel Bayron and Arnel Jan Sarmiento.\n";
-    cout << "Sean developed the original version of the program. Arnel then modified the program to make it more efficient.\n";
-    cout << "Sean also implemented the infix to postfix conversion while Arnel implemented the postfix evaluation.\n";
-}
-
-void instructions()
-{
-    cout << "\nWelcome to this Expression Evaluator program! Please choose an action to perform...\n";
-    cout << "[P] Program Description\n";
-    cout << "[E] Evaluate Expression(s)\n";
-    cout << "[X] Exit\n";
-    cout << "Choice: ";
-}
-
-void infix_to_postfix(const char* infix, char* postfix) {
     int infix_length = strlen(infix);
     int j = 0;
     stack<char> stack;
@@ -117,28 +116,33 @@ void infix_to_postfix(const char* infix, char* postfix) {
         cerr << "Error: Invalid expression\n";
         return;
     }
-    
 
-    for (int i = 0; i < infix_length; i++) {
-        
+    for (int i = 0; i < infix_length; i++)
+    {
+
         char current_char = infix[i];
 
-        if (isdigit(current_char)) {
+        if (isdigit(current_char))
+        {
             // append digits directly to postfix expression
-            while (isdigit(infix[i])) {
+            while (isdigit(infix[i]))
+            {
                 postfix[j++] = infix[i++];
             }
             i--; // back up one character since we advanced one too far
-        } else if (is_operator(current_char)) {
-            if (is_operator(infix[i+1]))
+        }
+        else if (is_operator(current_char))
+        {
+            if (is_operator(infix[i + 1]))
             {
                 cerr << "Error: Invalid expression\n";
                 return;
             }
-            
+
             postfix[j++] = ' ';
             // pop operators with higher or equal precedence from stack
-            while (!stack.empty() && stack.top() != '(' && precedence(stack.top()) >= precedence(current_char)) {
+            while (!stack.empty() && stack.top() != '(' && precedence(stack.top()) >= precedence(current_char))
+            {
                 postfix[j++] = stack.top();
                 postfix[j++] = ' ';
                 stack.pop();
@@ -146,43 +150,53 @@ void infix_to_postfix(const char* infix, char* postfix) {
 
             // push current operator onto stack
             stack.push(current_char);
-        } else if (current_char == '(') {
+        }
+        else if (current_char == '(')
+        {
             // push left parenthesis onto stack
-            if (is_operator(infix[i+1]))
+            if (is_operator(infix[i + 1]))
             {
                 cerr << "Error: Invalid expression\n";
                 return;
             }
-            
+
             stack.push(current_char);
-        } else if (current_char == ')') {
-            if (!is_operator(infix[i+1]) && infix[i+1] != '\0')
+        }
+        else if (current_char == ')')
+        {
+            if (!is_operator(infix[i + 1]) && infix[i + 1] != '\0')
             {
                 cerr << "Error: Invalid expression\n";
                 return;
             }
-            
+
             // pop operators until left parenthesis is found
-            while (!stack.empty() && stack.top() != '(') {
+            while (!stack.empty() && stack.top() != '(')
+            {
                 postfix[j++] = ' ';
                 postfix[j++] = stack.top();
                 stack.pop();
             }
-            if (stack.empty()) {
+            if (stack.empty())
+            {
                 cerr << "Error: Mismatched parentheses in infix expression\n";
                 return;
             }
             // discard left parenthesis
             stack.pop();
-        } else {
+        }
+        else
+        {
             // invalid character
             cerr << "Error: Invalid character '" << current_char << "' in infix expression\n";
             return;
         }
     }
     // append remaining operators from stack to postfix expression
-    while (!stack.empty()) {
-        if (stack.top() == '(' || stack.top() == ')') {
+    while (!stack.empty())
+    {
+        if (stack.top() == '(' || stack.top() == ')')
+        {
             cerr << "Error: Mismatched parentheses in infix expression\n";
             return;
         }
@@ -193,37 +207,88 @@ void infix_to_postfix(const char* infix, char* postfix) {
 
     // terminate postfix expression with null character
     postfix[j] = '\0';
+    // Display postfix
     cout << "Postfix expression: " << postfix << '\n';
+    // Evaluate postfix
+    cout << "Result: " << evaluate_postfix((postfix)) << endl;
 }
 
-int evaluate_postfix(string postfix) {
-    stack<int> stack; // use stack instead of array
-    string delimiter = " "; // set delimiter as a string
-    size_t pos = 0;
-    string token;
-    while ((pos = postfix.find(delimiter)) != string::npos) {
-        token = postfix.substr(0, pos);
-        postfix.erase(0, pos + delimiter.length());
-        if (isdigit(token[0])) {
+/*
+    This function evaluates a postfix expression
+    Input: postfix expression
+    Output: result of the expression
+*/
+int evaluate_postfix(char *postfix)
+{
+    int stack[100];
+    int top = -1;                       // initialize stack top index to -1
+    char *token = strtok(postfix, " "); // tokenize the string by spaces
+    while (token != NULL)
+    {
+        if (isdigit(token[0]))
+        {
             // if token is a number, convert it to an integer and push it onto the stack
-            int num = stoi(token);
-            stack.push(num);
-        } else {
+            int num = atoi(token);
+            stack[++top] = num;
+        }
+        else
+        {
             // if token is an operator, pop the top two elements from the stack
             // perform the operation and push the result onto the stack
-            int op2 = stack.top(); stack.pop();
-            int op1 = stack.top(); stack.pop();
-            switch (token[0]) {
-                case '+': stack.push(op1 + op2); break;
-                case '-': stack.push(op1 - op2); break;
-                case '*': stack.push(op1 * op2); break;
-                case '/': stack.push(op1 / op2); break;
-                case '%': stack.push(op1 % op2); break;
+            int op2 = stack[top--];
+            int op1 = stack[top--];
+            switch (token[0])
+            {
+            case '+':
+                stack[++top] = op1 + op2;
+                break;
+            case '-':
+                stack[++top] = op1 - op2;
+                break;
+            case '*':
+                stack[++top] = op1 * op2;
+                break;
+            case '/':
+                stack[++top] = op1 / op2;
+                break;
+            case '%':
+                stack[++top] = op1 % op2;
+                break;
             }
         }
+        token = strtok(NULL, " "); // get next token
     }
-    // convert last token to integer and push it onto the stack
-    int num = stoi(postfix);
-    stack.push(num);
-    return stack.top(); // the final result will be on top of the stack
+    return stack[top]; // the final result will be on top of the stack
+}
+
+/*
+    This function prints the program description
+    Input: none
+    Output: none
+*/
+void description()
+{
+    cout << "\nName: Sean Gabriel Bayron\n"
+         << "Student Number: 2021-04354\n"
+         << "Name: Arnel Jan Sarmiento\n"
+         << "Student Number: 2021-05094\n"
+         << "Date: 2023-3-17\n"
+         << "This program converts a given infix expression to its equivalent postfix expression and then evaluates the expression.\n"
+         << "The program was developed by Sean Gabriel Bayron and Arnel Jan Sarmiento.\n"
+         << "Sean developed the original version of the program. Arnel then modified the program to make it more efficient.\n"
+         << "Sean also implemented the infix to postfix conversion while Arnel implemented the postfix evaluation.\n";
+}
+
+/*
+    This function prints the program instructions
+    Input: none
+    Output: none
+*/
+void instructions()
+{
+    cout << "\nWelcome to this Expression Evaluator program! Please choose an action to perform...\n"
+         << "[P] Program Description\n"
+         << "[E] Evaluate Expression(s)\n"
+         << "[X] Exit\n"
+         << "Choice: ";
 }

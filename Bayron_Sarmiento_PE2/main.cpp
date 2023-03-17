@@ -160,7 +160,7 @@ void description()
     cout << "Student Number: 2021-04354\n";
     cout << "Name: Arnel Jan Sarmiento\n";
     cout << "Student Number: 2021-05094\n";
-    cout << "Date: 2023-3-05\n";
+    cout << "Date: 2023-3-17\n";
     cout << "This program is a string compression/expansion program. It can compress and expand strings.\n";
     cout << "The program was developed by Sean Gabriel Bayron and Arnel Jan Sarmiento.\n";
     cout << "Arnel developed the original version of the program. Sean then modified the program to make it more efficient.\n";
