@@ -154,7 +154,7 @@ void calculate(const char *infix, char *postfix)
 
     if (is_operator(infix[0]) || is_operator(infix[-1]))
     {
-        cerr << "Error: Invalid expression\n";
+        cerr << "\nError: Invalid expression\n";
         return;
     }
 
@@ -177,7 +177,7 @@ void calculate(const char *infix, char *postfix)
 
             if (is_operator(infix[i + 1]) || infix[i + 1] == '\0')
             {
-                cerr << "Error: Invalid expression\n";
+                cerr << "\nError: Invalid expression\n";
                 return;
             }
 
@@ -198,7 +198,7 @@ void calculate(const char *infix, char *postfix)
             // push left parenthesis onto stack
             if (is_operator(infix[i + 1]))
             {
-                cerr << "Error: Invalid expression\n";
+                cerr << "\nError: Invalid expression\n";
                 return;
             }
 
@@ -208,7 +208,7 @@ void calculate(const char *infix, char *postfix)
         {
             if (!is_operator(infix[i + 1]) && infix[i + 1] != '\0')
             {
-                cerr << "Error: Invalid expression\n";
+                cerr << "\nError: Invalid expression\n";
                 return;
             }
 
@@ -221,7 +221,7 @@ void calculate(const char *infix, char *postfix)
             }
             if (stack.empty())
             {
-                cerr << "Error: Mismatched parentheses in infix expression\n";
+                cerr << "\nError: Mismatched parentheses in infix expression\n";
                 return;
             }
             // discard left parenthesis
@@ -230,7 +230,7 @@ void calculate(const char *infix, char *postfix)
         else
         {
             // invalid character
-            cerr << "Error: Invalid character '" << current_char << "' in infix expression\n";
+            cerr << "\nError: Invalid character '" << current_char << "' in infix expression\n";
             return;
         }
     }
@@ -239,7 +239,7 @@ void calculate(const char *infix, char *postfix)
     {
         if (stack.top() == '(' || stack.top() == ')')
         {
-            cerr << "Error: Mismatched parentheses in infix expression\n";
+            cerr << "\nError: Mismatched parentheses in infix expression\n";
             return;
         }
         postfix[j++] = ' ';
