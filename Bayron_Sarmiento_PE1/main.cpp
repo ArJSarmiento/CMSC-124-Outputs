@@ -8,6 +8,7 @@
 using namespace std;
 
 // prototypes
+char choice_validation(string input);
 char is_operator(char c);
 string remove_space(string str);
 void calculate(const char *infix, char *postfix);
@@ -18,19 +19,20 @@ void instructions();
 int main()
 {
     const int MAX = 100;
-    char choice = '\0';
+    string choice = "\0";
+    string continue_choice = "Y";
     string input_expr;
     string infix;
     string parsedInfix;
     char postfix[MAX];
 
-    while (choice != 'X' && choice != 'x')
+    while (choice != "X" && choice != "x")
     {
         instructions();
 
         cin >> choice;
 
-        switch (choice)
+        switch (choice_validation(choice))
         {
         case 'P':
         case 'p':
@@ -38,24 +40,63 @@ int main()
             break;
         case 'E':
         case 'e':
+            continue_choice = 'Y';
+
             cout << "\nEnter an infix expression: ";
             cin.ignore();
             getline(cin, infix);
 
             parsedInfix = remove_space(infix);
             calculate(parsedInfix.c_str(), postfix);
+
+            while (continue_choice != "N" && continue_choice != "n")
+            {
+                cout << "\nContinue? (Y/N): ";
+                cin >> continue_choice;
+                switch (choice_validation(continue_choice))
+                {
+                case 'Y':
+                case 'y':
+                    cout << "\nEnter an infix expression: ";
+                    cin.ignore();
+                    getline(cin, infix);
+
+                    parsedInfix = remove_space(infix);
+                    calculate(parsedInfix.c_str(), postfix);
+                    break;
+
+                case 'N':
+                case 'n':
+                    break;
+
+                default:
+                    cerr << "\nInvalid input\n";
+                    break;
+                }
+            }
             break;
+
         case 'X':
         case 'x':
             cout << "\nExiting program...\n";
             break;
         default:
             cerr << "\nInvalid input\n";
+            choice = "\0";
             break;
         }
     }
 
     return 0;
+}
+
+char choice_validation(string input)
+{
+    if (input.length() > 1)
+    {
+        return 'I';
+    }
+    return input[0];
 }
 
 /*
@@ -133,7 +174,8 @@ void calculate(const char *infix, char *postfix)
         }
         else if (is_operator(current_char))
         {
-            if (is_operator(infix[i + 1]))
+
+            if (is_operator(infix[i + 1]) || infix[i + 1] == '\0')
             {
                 cerr << "Error: Invalid expression\n";
                 return;
