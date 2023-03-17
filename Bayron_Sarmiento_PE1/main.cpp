@@ -15,6 +15,7 @@ void calculate(const char *infix, char *postfix);
 int evaluate_postfix(char *postfix);
 void description();
 void instructions();
+void input_validation(string &str);
 
 int main()
 {
@@ -29,8 +30,7 @@ int main()
     while (choice != "X" && choice != "x")
     {
         instructions();
-
-        cin >> choice;
+        input_validation(choice);
 
         switch (choice_validation(choice))
         {
@@ -43,8 +43,7 @@ int main()
             continue_choice = 'Y';
 
             cout << "\nEnter an infix expression: ";
-            cin.ignore();
-            getline(cin, infix);
+            input_validation(infix);
 
             parsedInfix = remove_space(infix);
             calculate(parsedInfix.c_str(), postfix);
@@ -52,14 +51,13 @@ int main()
             while (continue_choice != "N" && continue_choice != "n")
             {
                 cout << "\nContinue? (Y/N): ";
-                cin >> continue_choice;
+                input_validation(continue_choice);
                 switch (choice_validation(continue_choice))
                 {
                 case 'Y':
                 case 'y':
                     cout << "\nEnter an infix expression: ";
-                    cin.ignore();
-                    getline(cin, infix);
+                    input_validation(infix);
 
                     parsedInfix = remove_space(infix);
                     calculate(parsedInfix.c_str(), postfix);
@@ -333,4 +331,14 @@ void instructions()
          << "[E] Evaluate Expression(s)\n"
          << "[X] Exit\n"
          << "Choice: ";
+}
+
+/*
+    This function validates string inputs. Gets the entire line of input.
+    Input: pointer of input string
+    Output: none
+*/
+void input_validation(string &str)
+{
+    getline(cin >> ws, str);
 }

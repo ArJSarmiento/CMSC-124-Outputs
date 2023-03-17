@@ -14,20 +14,17 @@ void choice_validation(char &validated_continue_choice, string &continue_choice)
 
 int main()
 {
-    string choice;
-    string continue_choice;
-    char validated_choice = '\0';
-    char validated_continue_choice = '\0';
     string str;
+    string choice = "\0";
+    string continue_choice;
+    char validated_continue_choice = '\0';
 
     while (choice != "X" && choice != "x")
     {
         instructions();
+        input_validation(choice);
 
-        cin >> choice;
-        validated_choice = choice_transformer(choice);
-
-        switch (validated_choice)
+        switch (choice_transformer(choice))
         {
         case 'P':
         case 'p':
@@ -187,8 +184,7 @@ void description()
 */
 void input_validation(string &str)
 {
-    cin.ignore();
-    getline(cin, str);
+    getline(cin >> ws, str);
 }
 
 /*
@@ -198,10 +194,10 @@ void input_validation(string &str)
 */
 char choice_transformer(string input)
 {
+    if (input.empty())
+        return '\0';
     if (input.length() > 1)
-    {
         return 'I';
-    }
     return input[0];
 }
 
@@ -216,7 +212,7 @@ void choice_validation(char &validated_continue_choice, string &continue_choice)
     while (validated_continue_choice != 'Y' && validated_continue_choice != 'y' && validated_continue_choice != 'N' && validated_continue_choice != 'n')
     {
         cout << "\nContinue? (Y/N): ";
-        cin >> continue_choice;
+        input_validation(continue_choice);
         validated_continue_choice = choice_transformer(continue_choice);
         switch (validated_continue_choice)
         {
@@ -226,7 +222,7 @@ void choice_validation(char &validated_continue_choice, string &continue_choice)
         case 'n':
             break;
         default:
-            cerr << "\nInvalid input\n";
+            cerr << "Invalid input\n";
             break;
         }
     }
