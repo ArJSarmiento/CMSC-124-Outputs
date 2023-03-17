@@ -9,19 +9,25 @@ void expand(string str);
 void description();
 void instructions();
 void input_validation(string &str);
+char choice_transformer(string input);
+void choice_validation(char &validated_continue_choice, string &continue_choice);
 
 int main()
 {
-    char choice;
+    string choice;
+    string continue_choice;
+    char validated_choice = '\0';
+    char validated_continue_choice = '\0';
     string str;
 
-    while (choice != 'X' && choice != 'x')
+    while (choice != "X" && choice != "x")
     {
         instructions();
 
         cin >> choice;
+        validated_choice = choice_transformer(choice);
 
-        switch (choice)
+        switch (validated_choice)
         {
         case 'P':
         case 'p':
@@ -29,15 +35,23 @@ int main()
             break;
         case 'E':
         case 'e':
-            cout << "\nEnter a string to expand: ";
-            input_validation(str);
-            expand(str);
+            do
+            {
+                cout << "\nEnter a string to expand: ";
+                input_validation(str);
+                expand(str);
+                choice_validation(validated_continue_choice, continue_choice);
+            } while (validated_continue_choice == 'Y' || validated_continue_choice == 'y');
             break;
         case 'C':
         case 'c':
-            cout << "\nEnter a string to compress: ";
-            input_validation(str);
-            compress(str);
+            do
+            {
+                cout << "\nEnter a string to compress: ";
+                input_validation(str);
+                compress(str);
+                choice_validation(validated_continue_choice, continue_choice);
+            } while (validated_continue_choice == 'Y' || validated_continue_choice == 'y');
             break;
         case 'X':
         case 'x':
@@ -175,4 +189,45 @@ void input_validation(string &str)
 {
     cin.ignore();
     getline(cin, str);
+}
+
+/*
+    This function transforms the input to a single character
+    Input: string
+    Output: character
+*/
+char choice_transformer(string input)
+{
+    if (input.length() > 1)
+    {
+        return 'I';
+    }
+    return input[0];
+}
+
+/*
+    This function validates the choice of the user
+    Input: pointer of validated choice, pointer of choice
+    Output: none
+*/
+void choice_validation(char &validated_continue_choice, string &continue_choice)
+{
+    validated_continue_choice = '\0';
+    while (validated_continue_choice != 'Y' && validated_continue_choice != 'y' && validated_continue_choice != 'N' && validated_continue_choice != 'n')
+    {
+        cout << "\nContinue? (Y/N): ";
+        cin >> continue_choice;
+        validated_continue_choice = choice_transformer(continue_choice);
+        switch (validated_continue_choice)
+        {
+        case 'Y':
+        case 'y':
+        case 'N':
+        case 'n':
+            break;
+        default:
+            cerr << "\nInvalid input\n";
+            break;
+        }
+    }
 }
