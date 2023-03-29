@@ -89,8 +89,7 @@
 
 ; F - returns the number of factors of a number
 (define (count-factors m n)
-  (if (= n 1)
-      0
-      (if (= (remainder n m) 0)
-          (+ 1 (count-factors m (/ n m)))
-          (count-factors m (- n 1)))))
+  (let loop ((n n) (count 0))
+    (cond ((= n 1) (if (= count 0) "None" count))
+          ((= (remainder n m) 0) (loop (/ n m) (+ count 1)))
+          (else (loop (- n 1) count)))))
