@@ -36,6 +36,9 @@ main
 *.out
 *.app
 
+*.rkt~
+*.scm~
+
 tempCodeRunnerFile
 tempCodeRunnerFile.c
 tempCodeRunnerFile.cpp

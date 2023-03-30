@@ -1,6 +1,3 @@
-;; The first three lines of this file were inserted by DrRacket. They record metadata
-;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-advanced-reader.ss" "lang")((modname Bayron_Sarmiento_PE3) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #t #t none #f () #f)))
 (begin
     (display "Programming Exercise 3")
     (newline)
@@ -21,7 +18,7 @@
 
 ; A - returns the factorial of a number
 (define (Factorial n)
-  (if (< n 0)
+  (if (< n 0) ; error if n is less than 0
       (error "Please input 0 or positive integers")
   (if (= n 0)
       1
@@ -35,17 +32,17 @@
         (error "Please input numbers greater than 0"))
       (if (= n 1)
           (display "1")
-          (if (and (= (remainder n 2) 0) (= (remainder n 3) 0))
+          (if (and (= (remainder n 2) 0) (= (remainder n 3) 0)) ;if n is divisible by 2 and 3, then display T-ICE
               (begin
                 (T-Ice (- n 1))
                 (newline)
                 (display "T-ICE"))
-              (if (= (remainder n 2) 0)
+              (if (= (remainder n 2) 0) ; if n is divisible by 2, then display T
                   (begin
                     (T-Ice (- n 1))
                     (newline)
                     (display "T"))
-                  (if (= (remainder n 3) 0)
+                  (if (= (remainder n 3) 0) ; if n is divisible by 3, then display ICE
                       (begin
                         (T-Ice (- n 1))
                         (newline)
@@ -57,31 +54,31 @@
 
 
 ; C - returns the sum of all prime numbers from 1 to n
+(define (Sumprimes n)
+  (if (= n 1)
+      0
+      (if (isPrime n) ; if n is a prime number, then add it to the sum
+          (+ n (Sumprimes (- n 1)))
+          (Sumprimes (- n 1)))))
+
 (define (isPrime n)
-  (if (or (= n 1) (= n 2))
+  (if (or (= n 1) (= n 2)) ; if n is 1 or 2, then it is a prime number
       #t
-      (if (= (remainder n 2) 0)
+      (if (= (remainder n 2) 0) ; if n is divisible by 2, then it is not a prime number
           #f
           (isPrime_helper n 3))))
 
 (define (isPrime_helper n i)
-  (if (> i (sqrt n))
+  (if (> i (sqrt n)) ; if i is greater than the square root of n, then it is a prime number
       #t
-      (if (= (remainder n i) 0)
+      (if (= (remainder n i) 0) ; if n is divisible by i, then it is not a prime number
           #f
           (isPrime_helper n (+ i 2)))))
-
-(define (Sumprimes n)
-  (if (= n 1)
-      0
-      (if (isPrime n)
-          (+ n (Sumprimes (- n 1)))
-          (Sumprimes (- n 1)))))
 
 
 ; D - returns the result of a mathematical operation
 (define (perform-op m n opt)
-  (cond ((equal? opt '+) (+ m n))
+  (cond ((equal? opt '+) (+ m n)) 
         ((equal? opt '-) (- m n))
         ((equal? opt '*) (* m n))
         ((equal? opt '/) (/ m n))
@@ -91,7 +88,7 @@
 
 ; E - return the distance between two points
 (define (calc-distance x1 x2 y1 y2)
-  (sqrt (+ (expt (abs (- x2 x1)) 2)
+  (sqrt (+ (expt (abs (- x2 x1)) 2) 
            (expt (abs (- y2 y1)) 2))))
 
 
