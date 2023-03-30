@@ -32,7 +32,6 @@
 (define (T-Ice n)
   (if (< n 0)
       (begin
-        (newline)
         (error "Please input numbers greater than 0"))
       (if (= n 1)
           (display "1")
