@@ -18,40 +18,34 @@
 
 ; A - returns the factorial of a number
 (define (Factorial n)
-  (if (< n 0)
-        (error "Please input 0 or positive integers")
-    (if (= n 0)
-        1
-        (* n (Factorial (- n 1))))))
+  (if (= n 0)
+      1
+      (* n (Factorial (- n 1)))))
 
 
 ; B - returns a set of numbers based on the T-Ice pattern from 1 to n
 (define (T-Ice n)
-  (if (< n 0)
-      (begin
-        (newline)
-        (error "Please input numbers greater than 0"))
-    (if (= n 1)
-        (display "1")
-        (if (and (= (remainder n 2) 0) (= (remainder n 3) 0))
-            (begin
-              (T-Ice (- n 1))
-              (newline)
-              (display "T-ICE"))
-            (if (= (remainder n 2) 0)
-                (begin
-                  (T-Ice (- n 1))
-                  (newline)
-                  (display "T"))
-                (if (= (remainder n 3) 0)
-                    (begin
-                      (T-Ice (- n 1))
-                      (newline)
-                      (display "ICE"))
-                    (begin
-                      (T-Ice (- n 1))
-                      (newline)
-                      (display n))))))))
+  (if (= n 1)
+      (display "1")
+      (if (and (= (remainder n 2) 0) (= (remainder n 3) 0))
+          (begin
+            (T-Ice (- n 1))
+            (newline)
+            (display "T-ICE"))
+          (if (= (remainder n 2) 0)
+              (begin
+                (T-Ice (- n 1))
+                (newline)
+                (display "T"))
+              (if (= (remainder n 3) 0)
+                  (begin
+                    (T-Ice (- n 1))
+                    (newline)
+                    (display "ICE"))
+                  (begin
+                    (T-Ice (- n 1))
+                    (newline)
+                    (display n)))))))
 
 
 ; C - returns the sum of all prime numbers from 1 to n
@@ -95,7 +89,8 @@
 
 ; F - returns the number of factors of a number
 (define (count-factors m n)
-  (let loop ((n n) (count 0))
-    (cond ((= n 1) (if (= count 0) "None" count))
-          ((= (remainder n m) 0) (loop (/ n m) (+ count 1)))
-          (else (loop (- n 1) count)))))
+  (if (= n 1)
+      0
+      (if (= (remainder n m) 0)
+          (+ 1 (count-factors m (/ n m)))
+          (count-factors m (- n 1)))))

@@ -1,3 +1,6 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-advanced-reader.ss" "lang")((modname Bayron_Sarmiento_PE3) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #t #t none #f () #f)))
 (begin
     (display "Programming Exercise 3")
     (newline)
@@ -19,10 +22,10 @@
 ; A - returns the factorial of a number
 (define (Factorial n)
   (if (< n 0)
-        (error "Please input 0 or positive integers")
-    (if (= n 0)
-        1
-        (* n (Factorial (- n 1))))))
+      (error "Please input 0 or positive integers")
+  (if (= n 0)
+      1
+      (* n (Factorial (- n 1))))))
 
 
 ; B - returns a set of numbers based on the T-Ice pattern from 1 to n
@@ -31,27 +34,27 @@
       (begin
         (newline)
         (error "Please input numbers greater than 0"))
-    (if (= n 1)
-        (display "1")
-        (if (and (= (remainder n 2) 0) (= (remainder n 3) 0))
-            (begin
-              (T-Ice (- n 1))
-              (newline)
-              (display "T-ICE"))
-            (if (= (remainder n 2) 0)
-                (begin
-                  (T-Ice (- n 1))
-                  (newline)
-                  (display "T"))
-                (if (= (remainder n 3) 0)
-                    (begin
-                      (T-Ice (- n 1))
-                      (newline)
-                      (display "ICE"))
-                    (begin
-                      (T-Ice (- n 1))
-                      (newline)
-                      (display n))))))))
+      (if (= n 1)
+          (display "1")
+          (if (and (= (remainder n 2) 0) (= (remainder n 3) 0))
+              (begin
+                (T-Ice (- n 1))
+                (newline)
+                (display "T-ICE"))
+              (if (= (remainder n 2) 0)
+                  (begin
+                    (T-Ice (- n 1))
+                    (newline)
+                    (display "T"))
+                  (if (= (remainder n 3) 0)
+                      (begin
+                        (T-Ice (- n 1))
+                        (newline)
+                        (display "ICE"))
+                      (begin
+                        (T-Ice (- n 1))
+                        (newline)
+                        (display n))))))))
 
 
 ; C - returns the sum of all prime numbers from 1 to n
@@ -95,7 +98,21 @@
 
 ; F - returns the number of factors of a number
 (define (count-factors m n)
-  (let loop ((n n) (count 0))
+  (if (= m 1)
+    1
+    (let loop ((n n) (count 0))
     (cond ((= n 1) (if (= count 0) "None" count))
           ((= (remainder n m) 0) (loop (/ n m) (+ count 1)))
-          (else (loop (- n 1) count)))))
+          (else (loop (- n 1) count))))))
+
+;Count-factors function 
+(define (countf m n)
+  (if (or (<= n 0) (<= m 0))
+      (error "Please input positive integers")
+      (if (= m 1)
+          1
+          (if (= (modulo n m) 0) ;check if the the remainder of n to m is zero to proceed in getting its factor
+              (if (<= (modulo (/ n m) m)0) 
+                  (+ 1(countf m(/ n m))) ;adds 1 and recursively call the function 
+                  1) ;returns 1 if the remainder is greater than 0
+              (display "None"))))) ;displays None if there is no factors to be counted)
