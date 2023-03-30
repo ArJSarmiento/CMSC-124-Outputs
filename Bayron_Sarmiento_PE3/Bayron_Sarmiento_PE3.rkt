@@ -97,22 +97,13 @@
 
 
 ; F - returns the number of factors of a number
-(define (count-factors m n)
-  (if (= m 1)
-    1
-    (let loop ((n n) (count 0))
-    (cond ((= n 1) (if (= count 0) "None" count))
-          ((= (remainder n m) 0) (loop (/ n m) (+ count 1)))
-          (else (loop (- n 1) count))))))
-
-;Count-factors function 
-(define (countf m n)
+ (define (count-factors m n)
   (if (or (<= n 0) (<= m 0))
-      (error "Please input positive integers")
+      (error "Please input positive integers") ; checks if m & n are less than or equal to 0
       (if (= m 1)
           1
-          (if (= (modulo n m) 0) ;check if the the remainder of n to m is zero to proceed in getting its factor
+          (if (= (modulo n m) 0) ; if m is a factor of n or n % m = 0, then proceed to count the factor
               (if (<= (modulo (/ n m) m)0) 
-                  (+ 1(countf m(/ n m))) ;adds 1 and recursively call the function 
-                  1) ;returns 1 if the remainder is greater than 0
-              (display "None"))))) ;displays None if there is no factors to be counted)
+                  (+ 1(count-factors m(/ n m))) ;adds 1 and recursively call the function 
+                  1) ; return 1 if the remainder > 0
+              (display "None"))))) ; displays None if it is not a factor
