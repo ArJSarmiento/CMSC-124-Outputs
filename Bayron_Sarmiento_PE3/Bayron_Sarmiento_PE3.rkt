@@ -31,26 +31,23 @@
       (begin
         (error "Please input numbers greater than 0"))
       (if (= n 1)
-          (display "1")
+          (display "1 ")
           (if (and (= (remainder n 2) 0) (= (remainder n 3) 0)) ;if n is divisible by 2 and 3, then display T-ICE
               (begin
                 (T-Ice (- n 1))
-                (newline)
-                (display "T-ICE"))
+                (display "T-ICE "))
               (if (= (remainder n 2) 0) ; if n is divisible by 2, then display T
                   (begin
                     (T-Ice (- n 1))
-                    (newline)
-                    (display "T"))
+                    (display "T "))
                   (if (= (remainder n 3) 0) ; if n is divisible by 3, then display ICE
                       (begin
                         (T-Ice (- n 1))
-                        (newline)
-                        (display "ICE"))
+                        (display "ICE "))
                       (begin
                         (T-Ice (- n 1))
-                        (newline)
-                        (display n))))))))
+                        (display n)
+			(display " "))))))))
 
 
 ; C - returns the sum of all prime numbers from 1 to n
