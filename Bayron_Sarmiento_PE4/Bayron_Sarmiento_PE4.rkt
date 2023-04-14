@@ -1,7 +1,7 @@
 (begin
     (display "Programming Exercise 4")
     (newline)
-    (display "This program is a collection of functions that perform various tasks using the scheme language")
+    (display "This program is a collection of functions that perform various tasks with lists using the scheme language")
     (newline)
     (display "Sean Gabriel Bayron")
     (newline)
@@ -42,4 +42,9 @@
 (define (my-reverse2 lis)
   (if (null? lis)
       '()
-      (append (my-reverse2 (cdr lis)) (list (car lis)))))
+      (if (not (list? lis))
+          (error "Input is not a list")
+          (let loop ((lis lis) (acc '()))
+            (if (null? lis)
+                acc
+                (loop (cdr lis) (cons (car lis) acc)))))))
