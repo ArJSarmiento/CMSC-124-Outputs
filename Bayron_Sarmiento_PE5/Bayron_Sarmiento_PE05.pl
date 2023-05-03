@@ -1,3 +1,11 @@
+% Name: Sean Gabriel Bayron
+% Student Number: 2021-04354
+% Name: Arnel Jan Sarmiento
+% Student Number: 2021-05094
+% Date: 2023-4-30
+% This program is a Prolog Database for the Bayron ancestry tree programming exercise.
+% The program was developed by Sean Gabriel Bayron and Arnel Jan Sarmiento.
+
 % gender facts
 male(indaleciosr).
 male(ricardo).
