@@ -1,89 +1,90 @@
-# Gender Facts
-male(IndalecioSr).
-male(Richardo).
-male(Dante).
-male(Gilbert).
-male(IndalecioJr).
-male(Walter).
-male(Nolly).
-male(Saturnino).
-male(Sean).
-male(Paul).
-male(DJ).
-male(Kelvin).
-female(Tiburcia).
-female(Nelly).
-female(Genevieve).
-female(Emily).
-female(Lilly).
-female(Mary).
-female(Angela).
-female(Sophia).
+% gender facts
+male(indaleciosr).
+male(ricardo).
+male(dante).
+male(gilbert).
+male(indaleciojr).
+male(walter).
+male(nolly).
+male(saturnino).
+male(sean).
+male(paul).
+male(dj).
+male(kelvin).
+female(tiburcia).
+female(nelly).
+female(genevieve).
+female(emily).
+female(lilly).
+female(mary).
+female(lanie).
+female(angela).
+female(sophia).
 
-# Paternal Side
-parent(IndalecioSr, Dante).
-parent(IndalecioSr, Gilbert).
-parent(IndalecioSr, IndalecioJr).
-parent(IndalecioSr, Genevieve).
-parent(IndalecioSr, Walter).
-parent(Tiburcia, Dante).
-parent(Tiburcia, Gilbert).
-parent(Tiburcia, IndalecioJr).
-parent(Tiburcia, Genevieve).
-parent(Tiburcia, Walter).
+% paternal side
+parent(indaleciosr, dante).
+parent(indaleciosr, gilbert).
+parent(indaleciosr, indaleciojr).
+parent(indaleciosr, genevieve).
+parent(indaleciosr, walter).
+parent(tiburcia, dante).
+parent(tiburcia, gilbert).
+parent(tiburcia, indaleciojr).
+parent(tiburcia, genevieve).
+parent(tiburcia, walter).
 
-# Maternal Side
-parent(Ricardo, Emily).
-parent(Ricardo, Lilly).
-parent(Ricardo, Nolly).
-parent(Ricardo, Mary).
-parent(Ricardo, Lanie).
-parent(Nelly, Emily).
-parent(Nelly, Lilly).
-parent(Nelly, Nolly).
-parent(Nelly, Mary).
-parent(Nelly, Lanie).
+% maternal side
+parent(ricardo, emily).
+parent(ricardo, lilly).
+parent(ricardo, nolly).
+parent(ricardo, mary).
+parent(ricardo, lanie).
+parent(nelly, emily).
+parent(nelly, lilly).
+parent(nelly, nolly).
+parent(nelly, mary).
+parent(nelly, lanie).
 
-# Gilbert and Lilly Children
-parent(Gilbert, Sean).
-parent(Gilbert, Angela).
-parent(Gilbert, Paul).
-parent(Lilly, Sean).
-parent(Lilly, Angela).
-parent(Lilly, Paul).
+% gilbert and lilly children
+parent(gilbert, sean).
+parent(gilbert, angela).
+parent(gilbert, paul).
+parent(lilly, sean).
+parent(lilly, angela).
+parent(lilly, paul).
 
-# Saturnino and Lanie Children
-parent(Saturnino, DJ).
-parent(Saturnino, Sophia).
-parent(Saturnino, Kelvin).
-parent(Lanie, DJ).
-parent(Lanie, Sophia).
-parent(Lanie, Kelvin).
+% saturnino and lanie children
+parent(saturnino, dj).
+parent(saturnino, sophia).
+parent(saturnino, kelvin).
+parent(lanie, dj).
+parent(lanie, sophia).
+parent(lanie, kelvin).
 
-# IndalecioSr and Tiburcia Grandchildren
-grandparent(IndalecioSr, Sean).
-grandparent(IndalecioSr, Angela).
-grandparent(IndalecioSr, Paul).
-grandparent(Tiburcia, Sean).
-grandparent(Tiburcia, Angela).
-grandparent(Tiburcia, Paul).
+% indaleciosr and tiburcia grandchildren
+grandparent(indaleciosr, sean).
+grandparent(indaleciosr, angela).
+grandparent(indaleciosr, paul).
+grandparent(tiburcia, sean).
+grandparent(tiburcia, angela).
+grandparent(tiburcia, paul).
 
 
-# Richardo and Nelly Grandchildren
-grandparent(Ricardo, Sean).
-grandparent(Ricardo, Angela).
-grandparent(Ricardo, Paul).
-grandparent(Ricardo, DJ).
-grandparent(Ricardo, Sophia).
-grandparent(Ricardo, Kelvin).
-grandparent(Nelly, Sean).
-grandparent(Nelly, Angela).
-grandparent(Nelly, Paul).
-grandparent(Nelly, DJ).
-grandparent(Nelly, Sophia).
-grandparent(Nelly, Kelvin).
+% ricardo and nelly grandchildren
+grandparent(ricardo, sean).
+grandparent(ricardo, angela).
+grandparent(ricardo, paul).
+grandparent(ricardo, dj).
+grandparent(ricardo, sophia).
+grandparent(ricardo, kelvin).
+grandparent(nelly, sean).
+grandparent(nelly, angela).
+grandparent(nelly, paul).
+grandparent(nelly, dj).
+grandparent(nelly, sophia).
+grandparent(nelly, kelvin).
 
-# Rules
+% rules
 granpa(X,Y) :- male(X), parent(X,Z), parent(Z,Y).
 granma(X,Y) :- female(X), parent(X,Z), parent(Z,Y).
 
