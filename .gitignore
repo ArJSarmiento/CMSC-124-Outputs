@@ -38,6 +38,7 @@ main
 
 *.rkt~
 *.scm~
+*.class
 
 tempCodeRunnerFile
 tempCodeRunnerFile.c

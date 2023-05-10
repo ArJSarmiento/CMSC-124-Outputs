@@ -1,6 +1,6 @@
 This program demonstrates the following OOP concepts:
 
-Encapsulation: The Shape, Circle, and Rectangle classes encapsulate their properties and provide getters and setters for accessing and modifying their properties (geeksforgeeks.org).
-Inheritance: The Circle and Rectangle classes inherit from the Shape class, using the extends keyword (geeksforgeeks.org).
-Method Overloading: The Shape class provides two overloaded printDetails methods with different parameters (geeksforgeeks.org).
-Method Overriding: The Circle and Rectangle classes override the getArea and printDetails methods from the Shape class, using the @Override annotation (geeksforgeeks.org).
+Encapsulation: The Shape, Circle, and Rectangle classes encapsulate their properties and provide getters and setters for accessing and modifying their properties
+Inheritance: The Circle and Rectangle classes inherit from the Shape class, using the extends keyword
+Method Overloading: The Shape class provides two overloaded printDetails methods with different parameters
+Method Overriding: The Circle and Rectangle classes override the getArea and printDetails methods from the Shape class, using the @Override annotation
