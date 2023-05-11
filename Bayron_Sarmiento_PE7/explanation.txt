@@ -1,4 +1,4 @@
-Encapsulation: The attributes name and age are private, and their access is controlled through getter and setter methods stackoverflow.com.
-Inheritance: The Dog and Cat classes extend the Animal class, inheriting its attributes and methods learn.microsoft.com.
-Method Overloading: The speak method is overloaded in the Dog and Cat classes, meaning they have different implementations of the same method baeldung.com.
-Method Overriding: The makeSound method is overridden in the Dog and Cat classes, meaning they provide a new implementation of the same method from the Animal class baeldung.com.
+Encapsulation: The attributes name and age are private, and their access is controlled through getter and setter methods 
+Inheritance: The Dog and Cat classes extend the Animal class, inheriting its attributes and methods 
+Method Overloading: The speak method is overloaded in the Dog and Cat classes, meaning they have different implementations of the same method 
+Method Overriding: The makeSound method is overridden in the Dog and Cat classes, meaning they provide a new implementation of the same method from the Animal class 

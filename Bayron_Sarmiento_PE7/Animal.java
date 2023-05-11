@@ -34,5 +34,4 @@ public class Animal {
     public void canMakeSound() {
         System.out.println("The animal can make a sound");
     }
-
 }
