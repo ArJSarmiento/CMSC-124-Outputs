@@ -1,6 +1,4 @@
-This program demonstrates the following OOP concepts:
-
-Encapsulation: The Shape, Circle, and Rectangle classes encapsulate their properties and provide getters and setters for accessing and modifying their properties
-Inheritance: The Circle and Rectangle classes inherit from the Shape class, using the extends keyword
-Method Overloading: The Shape class provides two overloaded printDetails methods with different parameters
-Method Overriding: The Circle and Rectangle classes override the getArea and printDetails methods from the Shape class, using the @Override annotation
+Encapsulation: The attributes name and age are private, and their access is controlled through getter and setter methods stackoverflow.com.
+Inheritance: The Dog and Cat classes extend the Animal class, inheriting its attributes and methods learn.microsoft.com.
+Method Overloading: The speak method is overloaded in the Dog and Cat classes, meaning they have different implementations of the same method baeldung.com.
+Method Overriding: The makeSound method is overridden in the Dog and Cat classes, meaning they provide a new implementation of the same method from the Animal class baeldung.com.
